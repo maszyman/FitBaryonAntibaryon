@@ -1,0 +1,45 @@
+FF	= gfortran
+LD	= gfortran
+CC	= g++
+
+LDFLAGS	= `root-config --libs`
+FFFLAGS = -g -c
+CCFLAGS = `root-config --cflags` -g -c -std=c++11
+
+all: fitkcentminstarinf fitkcentminstarinfda fitkcentminstarinfdasdc fitkcentminaliceinf fitkcentminalicenewinf fitkcentminstarinfdasdcpap fitkcentminstarinfdasdclxy fitBaryonInteractions
+
+fitkcentminstarinf: fitkcentminstarinf.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+fitkcentminstarinfda: fitkcentminstarinfda.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+fitkcentminstarinfdasdc: fitkcentminstarinfdasdc.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+fitkcentminstarinfdasdcpap: fitkcentminstarinfdasdcpap.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+fitkcentminstarinfdasdclxy: fitkcentminstarinfdasdclxy.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+fitkcentminstarinfdasdclxypap: fitkcentminstarinfdasdclxypap.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+fitBaryonInteractions: fitBaryonInteractions.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+fitkcentminaliceinf: fitkcentminaliceinf.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+fitkcentminalicenewinf: fitkcentminalicenewinf.o
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+%.o: %.f
+	$(FF) $^ -o $@ $(FFFLAGS)
+
+%.o: %.C
+	$(CC) $^ -o $@ $(CCFLAGS)
+
+clean:
+	rm -f *.o fitkcentminstarinf fitkcentminstarinfda fitkcentminaliceinf fitkcentminalicenewinf fitBaryonInteractions
